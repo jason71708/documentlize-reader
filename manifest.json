@@ -1,0 +1,38 @@
+{
+  "name": "Documentlize Reader",
+  "description": "Make every page like paper.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs"
+  ],
+  "action": {
+    "default_icon": {
+      "16": "/images/documentlize-reader-icon16.png",
+      "32": "/images/documentlize-reader-icon32.png",
+      "48": "/images/documentlize-reader-icon48.png",
+      "128": "/images/documentlize-reader-icon128.png"
+    }
+  },
+  "icons": {
+    "16": "/images/documentlize-reader-icon16.png",
+    "32": "/images/documentlize-reader-icon32.png",
+    "48": "/images/documentlize-reader-icon48.png",
+    "128": "/images/documentlize-reader-icon128.png"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["https://forum.gamer.com.tw/*.php*"],
+      "run_at": "document_idle",
+      "css": ["content-style.css"],
+      "js": ["content-script.js"]
+    }
+  ]
+}
