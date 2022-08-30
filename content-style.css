@@ -1,0 +1,70 @@
+body {
+  background: none !important;
+}
+
+/* Header bar */
+.TOP-bh {
+  background: #fff !important;
+}
+
+.TOP-data .TOP-btn a::before {
+  filter: grayscale(1);
+}
+
+#BH-menu-path.BH-menu {
+  background: none;
+}
+
+.BH-menu-forumA-back .is-active {
+  background: #ccc !important;
+}
+
+/* Recommand block */
+.c-section .c-section__main.forum-b_promot-block.forum-c_promot-block {
+  display: none;
+}
+
+/* Footer */
+#BH-footer {
+  display: none !important;
+}
+
+/* B.php */
+/* Article title badge in list */
+.b-list__main .b-list__tile .b-list__summary__mark.b-mark {
+  background: #1A1A1A;
+}
+
+.b-list__main .b-list__tile .b-list__summary__mark.b-mark .material-icons {
+  display: none;
+}
+.b-list__main .b-list__tile .b-list__summary__mark.b-mark .master-icon {
+  display: none;
+}
+
+.b-list__row.b-list__row--sticky.b-list-item.b-imglist-item {
+  background: none;
+}
+
+.b-list__row.b-list__row--sticky.b-list-item.b-imglist-item:nth-child(odd) {
+  background: none;
+}
+
+.b-list .b-list__head {
+  background: none;
+}
+
+/* Ad */
+.b-list__row .b-list_ad {
+  display: none;
+}
+
+/* Image in Popular section */
+.b-popular.popular .popular__item .img {
+  display: none;
+}
+
+/* C.php */
+.c-section__main.popular .popular__item a .img {
+  display: none !important;
+}
