@@ -36,8 +36,15 @@ document.querySelectorAll('.b-list__img').forEach(e => e.style.display = 'none')
 // Left side
 document.querySelectorAll('.c-section__side').forEach(e => e.style.display = 'none');
 
-// Right side
-document.querySelectorAll( '#BH-slave' ).forEach(e => e.style.display = 'none');
+// Hide right side exclude chat room
+document.querySelectorAll( '#BH-slave' ).forEach(parent => {
+  parent.childNodes.forEach(child => {
+    if (child.id === 'chatRoom') return;
+    if (child.style) {
+      child.style.display = 'none'
+    }
+  })
+});
 
 // Users thumbnail
 document.querySelectorAll( '.reply-avatar' ).forEach( e => e.style.display = 'none' );
@@ -46,30 +53,40 @@ document.querySelectorAll( '.reply-avatar' ).forEach( e => e.style.display = 'no
 document.querySelectorAll( '.c-reply__head.nocontent' ).forEach(parent => {
   parent.childNodes.forEach(e => {
     if (e.id && e.id.indexOf('showoldCommend') > -1) {
+      let commendListId = ''
+      let firstCommendId = ''
+      parent.parentNode.childNodes.forEach(e => {
+        if (e.id && e.id.indexOf('Commendlist') > -1) {
+          commendListId = e.id
+          firstCommendId = e.firstChild.id
+        }
+      })
       e.addEventListener('click', () => {
-        setTimeout(() => {
-          document.querySelectorAll( '.reply-avatar' ).forEach( e => e.style.display = 'none' );
+        const intervalId = setInterval(() => {
+          const commendList = document.querySelector(`#${commendListId}`)
+          const firstCommend = document.querySelector(`#${firstCommendId}`)
+          if (commendList.firstChild !== firstCommend ) {
+            commendList.querySelectorAll( '.reply-avatar' ).forEach( e => e.style.display = 'none' );
+            clearInterval(intervalId)
+          }
         }, 1000)
       })
     }
   })
 });
 
-// document.querySelectorAll('.photoswipe-image').forEach(parent => {
-//   const imageElement = parent.querySelector('.lazyloaded')
-//   let showImage = false
-//   if (imageElement) {
-//     imageElement.style.display = 'none'
-//   }
-//   const imageButton = document.createElement('button', { type: 'button' })
-//   imageButton.innerText = 'open'
-//   imageButton.addEventListener('click', () => {
-//     if (imageElement) {
-//       imageElement.style.display = showImage ? 'none' : 'inline-block'
-//     }
-//     showImage = !showImage
-//     imageButton.innerText = showImage ? 'close' : 'open'
-//   })
-
-//   parent.appendChild(imageButton)
-// })
+// Hide article image & create a show button on it
+document.querySelectorAll('.photoswipe-image').forEach(photoswipeImage => {
+  let parent = photoswipeImage.parentElement.parentElement
+  if (parent.classList.value.includes('c-article__content')) parent = photoswipeImage.parentElement
+  const showButton = document.createElement('button', {type: 'button'})
+  showButton.innerText = 'Show Image'
+  parent.insertBefore(showButton, parent.firstChild)
+  photoswipeImage.style.display = 'none'
+  let isShow = false
+  showButton.addEventListener('click', () => {
+    photoswipeImage.style.display = isShow ? 'none' : 'inline-block'
+    showButton.innerText = isShow ? 'Show Image' : 'Hide Image'
+    isShow = !isShow
+  })
+})
