@@ -21,6 +21,7 @@ setTimeout(() => {
     }
   })
 }, 2000);
+document.querySelectorAll('.forum-ad_top').forEach(e => e.style.display = 'none');
 
 /**
  * B.php
